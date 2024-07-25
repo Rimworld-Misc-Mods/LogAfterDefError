@@ -19,9 +19,9 @@
     <WarningLevel>5</WarningLevel>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <Configurations>v1.5</Configurations>
+    <Configurations>Debug;Release</Configurations>
     <Version>0.3.800.85</Version>
-    <NoWarn>1701;1702;IL2121;CS8500;CS9082;CS8618;CS0649;CS8602;CS8605;CS8601;CS8600</NoWarn>
+    <NoWarn>1701;1702;IL2121;CS8500;CS9082;CS8618;CS0649;CS8602;CS8605;CS8601;CS8600;C8625</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
@@ -38,8 +38,13 @@
     <OutputPath>..\..\1.5\Assemblies\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Publicize Include="Assembly-CSharp:Verse.Log.messageQueue" IncludeVirtualMembers="False" />
-    <Publicize Include="Assembly-CSharp:Verse.Log.messageCount" IncludeVirtualMembers="False" />
-    <Publicize Include="Assembly-CSharp:Verse.LogMessageQueue.lastMessage" IncludeVirtualMembers="False" />
+    <Publicize Include="Assembly-CSharp:Verse.Log.messageQueue" />
+    <Publicize Include="Assembly-CSharp:Verse.Log.messageCount" />
+    <Publicize Include="Assembly-CSharp:Verse.LogMessageQueue.lastMessage" />
+    <Publicize Include="Assembly-CSharp:Verse.ModContentPack.LoadPatches" />
+    <Publicize Include="Assembly-CSharp:Verse.XmlInheritance+XmlInheritanceNode" />
+    <Publicize Include="Assembly-CSharp:Verse.XmlInheritance+XmlInheritanceNode.parent" />
+    <Publicize Include="Assembly-CSharp:Verse.XmlInheritance.resolvedNodes" />
+    <Publicize Include="Assembly-CSharp:Verse.PatchOperationPathed.xpath" />
   </ItemGroup>
 </Project>
