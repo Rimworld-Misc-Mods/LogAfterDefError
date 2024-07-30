@@ -134,13 +134,12 @@ namespace LogAfterDefError {
 				yield return code;
 				if(code.Calls(getValue)) {
 					yield return new CodeInstruction(OpCodes.Dup);
-					yield return new CodeInstruction(OpCodes.Call, setValue);
+					yield return new CodeInstruction(OpCodes.Ldsfld, typeof(Utility).Field(nameof(Utility.CurrentAsset)));
+					yield return new CodeInstruction(OpCodes.Callvirt, typeof(ThreadLocal<LoadableXmlAsset>).PropertySetter(nameof(ThreadLocal<LoadableXmlAsset>.Value)));
+				}
 				}
 			}
 		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static void SetPatch(LoadableXmlAsset asset) => Utility.CurrentAsset.Value = asset;
 	}
 
 	[HarmonyPatch]
