@@ -2,6 +2,9 @@
 <LanguageData>
 
   <LogAfterDefError.Settings>Def错误日志</LogAfterDefError.Settings>
-  <LogAfterDefError.Settings.Enabled>启用</LogAfterDefError.Settings.Enabled>
+  <LogAfterDefError.Settings.DefTraceEnabled>启用Def Xml错误跟踪</LogAfterDefError.Settings.DefTraceEnabled>
+  <LogAfterDefError.Settings.PatchTraceEnabled>启用Def Patch追踪-实验性</LogAfterDefError.Settings.PatchTraceEnabled>
+  <LogAfterDefError.PleaseEnablePatchTracking>你可以在Def错误日志设置中启用Patch追踪以获取Patch信息</LogAfterDefError.PleaseEnablePatchTracking>
+  <LogAfterDefError.Exception.Message>Def错误日志产生错误！！！\n请在工坊依照说明提供日志！</LogAfterDefError.Exception.Message>
   
 </LanguageData>

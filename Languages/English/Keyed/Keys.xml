@@ -2,6 +2,9 @@
 <LanguageData>
 
   <LogAfterDefError.Settings>Log After Def Error</LogAfterDefError.Settings>
-  <LogAfterDefError.Settings.Enabled>Enabled</LogAfterDefError.Settings.Enabled>
+  <LogAfterDefError.Settings.DefTraceEnabled>Enable Def Error Tracking</LogAfterDefError.Settings.DefTraceEnabled>
+  <LogAfterDefError.Settings.PatchTraceEnabled>Enable Patch Tracking - Experimental</LogAfterDefError.Settings.PatchTraceEnabled>
+  <LogAfterDefError.PleaseEnablePatchTracking>You can track patch operation by enabling option in Log After Def Error settings.</LogAfterDefError.PleaseEnablePatchTracking>
+  <LogAfterDefError.Exception.Message>There is an error happened in Log After Def Error!!!!!!\nPlease follow the instruction in the workshop to send the log to me!</LogAfterDefError.Exception.Message>
   
 </LanguageData>

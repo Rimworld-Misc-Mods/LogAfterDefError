@@ -31,28 +31,39 @@ namespace LogAfterDefError {
 		internal static string FormatAsset(string name, LoadableXmlAsset asset) {
 			return (name.NullOrEmpty() ? "" : name + ":") + FormatAsset(asset);
 		}
+
+		internal static void Clear() {
+			Patches.Clear();
+			Operations.Clear();
+			CurrentAsset.Dispose();
+			PatchTracer.Dispose();
+		}
 	}
 
 	public class LogAfterDefErrorMod : Mod {
+
+		internal static bool hasExpection = false;
 
 		public LogAfterDefErrorMod(ModContentPack content) : base(content) {
 			GetSettings<LogAfterDefErrorModSettings>();
 			RuntimeHelpers.RunClassConstructor(typeof(HarmonyPatches).TypeHandle);
 			LongEventHandler.ExecuteWhenFinished(() => {
+				Utility.Clear();
 				HarmonyPatches.RemovePatches();
-				Utility.Patches.Clear();
-				Utility.Operations.Clear();
-				Utility.CurrentAsset.Dispose();
-				Utility.PatchTracer.Dispose();
+				HarmonyPatches.PostPatch();
 			});
 		}
 
 		public override void DoSettingsWindowContents(Rect inRect) {
 			var listing = new Listing_Standard();
 			listing.Begin(inRect);
-			listing.CheckboxLabeled("LogAfterDefError.Settings.DefTraceEnabled".Translate(), ref LogAfterDefErrorModSettings.defTraceEnabled);
-			if(LogAfterDefErrorModSettings.defTraceEnabled) {
-				listing.CheckboxLabeled("LogAfterDefError.Settings.PatchTraceEnabled".Translate(), ref LogAfterDefErrorModSettings.patchTraceEnabled);
+			var enabled = LogAfterDefErrorModSettings.DefTraceEnabled;
+			listing.CheckboxLabeled("LogAfterDefError.Settings.DefTraceEnabled".Translate(), ref enabled);
+			LogAfterDefErrorModSettings.DefTraceEnabled = enabled;
+			if(LogAfterDefErrorModSettings.DefTraceEnabled) {
+				enabled = LogAfterDefErrorModSettings.PatchTraceEnabled;
+				listing.CheckboxLabeled("LogAfterDefError.Settings.PatchTraceEnabled".Translate(), ref enabled);
+				LogAfterDefErrorModSettings.PatchTraceEnabled = enabled;
 			}
 			listing.End();
 		}
@@ -64,12 +75,17 @@ namespace LogAfterDefError {
 
 	public class LogAfterDefErrorModSettings : ModSettings {
 
-		public static bool defTraceEnabled = true;
-		public static bool patchTraceEnabled = false;
+		private static bool defTraceEnabled = true;
+		private static bool patchTraceEnabled = true;
+
+		public static bool DefTraceEnabled { get { return defTraceEnabled; }  set { defTraceEnabled = value; } }
+		public static bool PatchTraceEnabled { get { return patchTraceEnabled && defTraceEnabled; } set { patchTraceEnabled = value; } }
+
+		internal const int version = 0;
 
 		public override void ExposeData() {
 			Scribe_Values.Look(ref defTraceEnabled, "defTraceEnabled", true);
-			Scribe_Values.Look(ref patchTraceEnabled, "patchTraceEnabled", false);
+			Scribe_Values.Look(ref patchTraceEnabled, "patchTraceEnabled", true);
 		}
 
 	}
